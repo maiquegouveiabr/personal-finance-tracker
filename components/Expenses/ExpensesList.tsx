@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   expensesContainer: {
     backgroundColor: "black",
     borderRadius: 5,
-    maxHeight: "80%",
+    maxHeight: "90%",
   },
 });
