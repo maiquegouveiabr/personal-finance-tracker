@@ -10,6 +10,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function ExpensesPage() {
   const { expenses } = useExpenseStore();
 
+  const sortedExpenses = [...expenses].sort((a, b) => b.date.getTime() - a.date.getTime());
+
   return (
     <PaperProvider>
       <SafeAreaView style={styles.mainContainer}>
@@ -21,7 +23,7 @@ export default function ExpensesPage() {
           Expenses, {expenses.length}
         </Title>
         <View style={styles.listContainer}>
-          <ExpensesList expenses={expenses} />
+          <ExpensesList expenses={sortedExpenses} />
           <Link style={styles.triggerModalBtn} href={"/createExpenseModal"}>
             Create New Expense
           </Link>

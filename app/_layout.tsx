@@ -21,7 +21,14 @@ export default function RootLayout() {
           name="createExpenseModal"
           options={{
             presentation: "modal",
-            title: "Create Expense Modal",
+            title: "Create New Expense",
+          }}
+        />
+        <Stack.Screen
+          name="detailExpenseModal"
+          options={{
+            presentation: "modal",
+            title: "Expense Details",
           }}
         />
       </Stack>

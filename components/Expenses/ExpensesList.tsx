@@ -1,9 +1,9 @@
-import { ExpenseType } from "@/types/ExpenseType";
+import { Expense } from "@/interfaces/Expense";
 import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import ExpenseItem from "./ExpenseItem";
 
 type Props = {
-  expenses: ExpenseType[];
+  expenses: Expense[];
   containerStyles?: StyleProp<ViewStyle>;
 };
 
