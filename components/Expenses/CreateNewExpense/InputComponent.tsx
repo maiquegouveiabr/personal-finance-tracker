@@ -5,7 +5,7 @@ import { TextInput, TextInputProps } from "react-native-paper";
 type Props = {
   label: string;
   value: string;
-  onChange: (text: string) => void;
+  onChange?: (text: string) => void;
 } & Omit<TextInputProps, "value" | "onChange">;
 
 export default function InputComponent({ value, onChange, label, ...props }: Props) {
