@@ -27,16 +27,10 @@ export interface Expense {
   duePaymentDate?: Date; // First due date
 
   isPaid: boolean; // Whether the whole expense is fully paid
-
   totalPrice: number; // Total amount to be paid
-  installments?: number;
-
-  // Payment history
-  payments: Payment[]; // ← Main change
+  paymentMethod: PaymentMethod; // Main payment method used for this expense
 
   merchant?: string;
-  tags?: string[];
-  note?: string;
 
   createdAt: Date;
   updatedAt: Date;

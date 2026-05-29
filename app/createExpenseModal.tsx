@@ -1,5 +1,6 @@
 import InputComponent from "@/components/Expenses/CreateNewExpense/InputComponent";
-import { Expense } from "@/interfaces/Expense";
+import PickerComponent from "@/components/PickerComponent";
+import { Expense, PaymentMethod } from "@/interfaces/Expense";
 import { useExpenseStore } from "@/stores/useExpenseStore";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { router } from "expo-router";
@@ -14,7 +15,7 @@ export default function CreateExpenseModal() {
   const [description, setDescription] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
   const [date, setDate] = useState(new Date());
-  const [installments, setInstallments] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const { addExpense } = useExpenseStore();
 
@@ -37,8 +38,8 @@ export default function CreateExpenseModal() {
       isPaid: false,
       totalPrice: Number(totalPrice),
       createdAt: new Date(),
-      payments: [],
       updatedAt: new Date(),
+      paymentMethod: PaymentMethod[paymentMethod as keyof typeof PaymentMethod],
     } as Expense;
 
     addExpense(newExpense);
@@ -82,16 +83,18 @@ export default function CreateExpenseModal() {
           disabled
           right={<TextInput.Icon icon="calendar" onPress={showDatePicker} />}
         />
-        {/* TODO: Add installments input and logic */}
-        <InputComponent
-          keyboardType="numeric"
-          label="Installments"
-          value={installments}
-          onChange={(text) => {
-            if (onlyNumbersRegex.test(text)) {
-              setInstallments(text);
-            }
-          }}
+        <PickerComponent
+          label="Payment Method"
+          data={[
+            { label: "Pix", value: "PIX" },
+            { label: "Credit Card", value: "CREDIT_CARD" },
+            { label: "Debit Card", value: "DEBIT_CARD" },
+            { label: "Cash", value: "CASH" },
+            { label: "Boleto", value: "BOLETO" },
+            { label: "Bank Transfer", value: "BANK_TRANSFER" },
+          ]}
+          selectedValue={paymentMethod}
+          onValueChange={setPaymentMethod}
         />
         <Button onPress={handleCreate} textColor="white" style={styles.createBtn}>
           Create New Expense
