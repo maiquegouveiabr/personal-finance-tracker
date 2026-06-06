@@ -21,14 +21,13 @@ export interface Expense {
   id: string;
   category: string;
   name: string;
-  description?: string;
+  description: string;
 
   date: Date; // Purchase / expense date
-  duePaymentDate?: Date; // First due date
 
   isPaid: boolean; // Whether the whole expense is fully paid
   totalPrice: number; // Total amount to be paid
-  paymentMethod: PaymentMethod; // Main payment method used for this expense
+  paymentMethod: string; // Main payment method used for this expense
 
   merchant?: string;
 

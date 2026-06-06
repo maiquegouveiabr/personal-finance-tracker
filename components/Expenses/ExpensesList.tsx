@@ -21,7 +21,7 @@ export default function ExpensesList({ expenses, containerStyles }: Props) {
 }
 const styles = StyleSheet.create({
   expensesContainer: {
-    backgroundColor: "black",
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
     maxHeight: "90%",
   },

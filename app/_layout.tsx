@@ -31,6 +31,13 @@ export default function RootLayout() {
             title: "Expense Details",
           }}
         />
+        <Stack.Screen
+          name="editExpenseModal"
+          options={{
+            presentation: "modal",
+            title: "Edit Expense",
+          }}
+        />
       </Stack>
       <StatusBar style="dark" />
     </>

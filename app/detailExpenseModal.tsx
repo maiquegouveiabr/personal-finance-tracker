@@ -1,16 +1,17 @@
 import GeneralDetailsComponent from "@/components/Expenses/GeneralDetails/GeneralDetailsComponent";
 import HeaderRight from "@/components/Expenses/HeaderRight";
 import MainDetails from "@/components/Expenses/MainDetails/MainDetailsComponent";
+import PrimaryButton from "@/components/PrimaryButton";
 import { useExpenseStore } from "@/stores/useExpenseStore";
+import { globalStyles } from "@/styles/globalStyles";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import React, { useLayoutEffect } from "react";
-import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 export default function DetailExpenseModal() {
   const navigation = useNavigation();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { expenses, removeExpense } = useExpenseStore();
+  const { expenses } = useExpenseStore();
 
   const expense = expenses.find((el) => el.id === id);
 
@@ -27,16 +28,13 @@ export default function DetailExpenseModal() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={[globalStyles.container]}>
       <MainDetails expense={expense} />
       <GeneralDetailsComponent expense={expense} />
-    </SafeAreaView>
+
+      <PrimaryButton buttonStyles={{ marginTop: 20 }} onPress={() => router.push(`/editExpenseModal?id=${id}`)}>
+        Edit Expense
+      </PrimaryButton>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-});

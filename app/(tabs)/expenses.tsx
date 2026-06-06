@@ -1,7 +1,9 @@
 import ExpensesList from "@/components/Expenses/ExpensesList";
-import Title from "@/components/Title";
+import ExpensesTitle from "@/components/Expenses/ExpensesTitle";
+import PrimaryButton from "@/components/PrimaryButton";
 import { useExpenseStore } from "@/stores/useExpenseStore";
-import { Link } from "expo-router";
+import { globalStyles } from "@/styles/globalStyles";
+import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { PaperProvider } from "react-native-paper";
@@ -14,19 +16,13 @@ export default function ExpensesPage() {
 
   return (
     <PaperProvider>
-      <SafeAreaView style={styles.mainContainer}>
-        <Title
-          containerStyles={{
-            alignItems: "flex-start",
-          }}
-        >
-          Expenses, {expenses.length}
-        </Title>
+      <SafeAreaView style={globalStyles.container}>
+        <ExpensesTitle />
         <View style={styles.listContainer}>
           <ExpensesList expenses={sortedExpenses} />
-          <Link style={styles.triggerModalBtn} href={"/createExpenseModal"}>
+          <PrimaryButton buttonStyles={{ marginTop: 20 }} onPress={() => router.push("/createExpenseModal")}>
             Create New Expense
-          </Link>
+          </PrimaryButton>
         </View>
       </SafeAreaView>
     </PaperProvider>
@@ -34,23 +30,10 @@ export default function ExpensesPage() {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    padding: 20,
-    height: "100%",
-  },
   listContainer: {
     marginTop: 20,
     flexDirection: "column",
     justifyContent: "space-between",
     minHeight: "80%",
-  },
-  triggerModalBtn: {
-    backgroundColor: "black",
-    color: "white",
-    padding: 10,
-    fontWeight: "bold",
-    borderRadius: 5,
-    textAlign: "center",
-    fontSize: 18,
   },
 });
